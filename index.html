@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Leaf Disease Detection — CNN Architecture</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #0d0d0d;
+            color: #fff;
+            font-family: 'Segoe UI', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 48px;
+            line-height: 1.4;
+        }
+
+        .diagram {
+            display: flex;
+            align-items: stretch;
+            gap: 12px;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+        }
+
+        .col-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .col-label.teal {
+            color: #2dd4bf;
+        }
+
+        .col-label.blue {
+            color: #60a5fa;
+        }
+
+        .col-label.purple {
+            color: #a78bfa;
+        }
+
+        .col-label.amber {
+            color: #fbbf24;
+        }
+
+        .col-label.green {
+            color: #4ade80;
+        }
+
+        .card {
+            border-radius: 14px;
+            padding: 20px 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+            flex: 1;
+            gap: 8px;
+            transition: transform 0.15s, box-shadow 0.15s;
+            cursor: default;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
+        }
+
+        .card.teal {
+            background: #0d3d33;
+            border: 1.5px solid #2dd4bf44;
+        }
+
+        .card.blue {
+            background: #0c2340;
+            border: 1.5px solid #60a5fa44;
+        }
+
+        .card.purple {
+            background: #1e1040;
+            border: 1.5px solid #a78bfa55;
+        }
+
+        .card.amber {
+            background: #2a1a00;
+            border: 1.5px solid #fbbf2444;
+        }
+
+        .card.green {
+            background: #0a2210;
+            border: 1.5px solid #4ade8044;
+        }
+
+        .card-title {
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .card-sub {
+            font-size: 0.78rem;
+            color: #9ca3af;
+            line-height: 1.5;
+        }
+
+        /* Icon placeholder */
+        .icon {
+            font-size: 2rem;
+            margin-bottom: 4px;
+        }
+
+        /* Model core inner layout */
+        .model-core-inner {
+            border: 1.5px solid #a78bfa33;
+            border-radius: 10px;
+            padding: 10px 8px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-top: 4px;
+        }
+
+        .sub-boxes {
+            display: flex;
+            gap: 6px;
+            width: 100%;
+        }
+
+        .sub-box {
+            flex: 1;
+            background: #2d1f5e;
+            border: 1px solid #a78bfa33;
+            border-radius: 8px;
+            padding: 10px 4px;
+            text-align: center;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: #c4b5fd;
+            line-height: 1.4;
+        }
+
+        .resnet-bar {
+            background: #1e1b2e;
+            border: 1px solid #6b7280aa;
+            border-radius: 8px;
+            padding: 8px;
+            text-align: center;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #d1d5db;
+            width: 100%;
+        }
+
+        /* Arrow between columns */
+        .arrow-col {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6b7280;
+            font-size: 1.4rem;
+            padding-top: 32px;
+            flex-shrink: 0;
+            width: 20px;
+        }
+
+        /* Results list */
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 6px 0;
+            border-bottom: 1px solid #1a2e1a;
+            font-size: 0.8rem;
+            gap: 8px;
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        .result-label {
+            color: #d1fae5;
+        }
+
+        .result-pct {
+            font-weight: 700;
+            color: #4ade80;
+            font-size: 0.85rem;
+        }
+
+        /* Dataset banner */
+        .dataset-banner {
+            margin-top: 32px;
+            width: 100%;
+            max-width: 1000px;
+            border: 1px solid #374151;
+            border-radius: 10px;
+            padding: 14px 24px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #9ca3af;
+        }
+
+        .dataset-banner span {
+            color: #e5e7eb;
+            font-weight: 600;
+        }
+
+        /* Output sub-boxes */
+        .output-sub {
+            width: 100%;
+            border: 1.5px solid #fbbf2433;
+            border-radius: 10px;
+            padding: 14px 10px;
+            text-align: center;
+            background: #1f1200;
+        }
+
+        .output-sub+.output-sub {
+            margin-top: 8px;
+        }
+
+        .output-sub .label {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #fbbf24;
+        }
+
+        .output-sub .sub {
+            font-size: 0.7rem;
+            color: #92400e;
+            margin-top: 2px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Leaf Disease Detection<br>Convolutional Neural Network (CNN)</h1>
+
+    <div class="diagram">
+
+        <!-- INPUT LAYER -->
+        <div class="col">
+            <div class="col-label teal">Input Layer</div>
+            <div class="card teal">
+                <div class="icon">📷</div>
+                <div class="card-title">Image Input</div>
+                <div class="card-sub">Leaf photo<br>(JPG / PNG)</div>
+            </div>
+        </div>
+
+        <div class="arrow-col">→</div>
+
+        <!-- DATA PIPELINE -->
+        <div class="col">
+            <div class="col-label blue">Data Pipeline</div>
+            <div class="card blue">
+                <div class="card-title">Image Preprocessing</div>
+                <div class="card-sub">
+                    Resize<br>
+                    Normalize<br>
+                    Augment
+                </div>
+            </div>
+        </div>
+
+        <div class="arrow-col">→</div>
+
+        <!-- MODEL CORE -->
+        <div class="col" style="flex: 2;">
+            <div class="col-label purple">Model Core</div>
+            <div class="card purple" style="align-items: flex-start; gap: 10px;">
+                <div style="width:100%; text-align:center;">
+                    <div class="card-title">MobileNetV2</div>
+                    <div class="card-sub">(Transfer Learning)</div>
+                </div>
+                <div class="model-core-inner">
+                    <div class="sub-boxes">
+                        <div class="sub-box">Feature<br>Extraction</div>
+                        <div class="sub-box">Global Avg<br>Pooling</div>
+                        <div class="sub-box">Dense<br>Layers</div>
+                    </div>
+                </div>
+                <div class="resnet-bar">ResNet50</div>
+            </div>
+        </div>
+
+        <div class="arrow-col">→</div>
+
+        <!-- OUTPUT LAYER -->
+        <div class="col">
+            <div class="col-label amber">Output Layer</div>
+            <div class="card amber" style="justify-content: flex-start; gap: 12px; padding-top: 20px;">
+                <div class="output-sub">
+                    <div class="label">Softmax Classifier</div>
+                </div>
+                <div style="color:#6b7280; font-size:1rem;">↓</div>
+                <div class="output-sub">
+                    <div class="label">13 Disease Classes</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="arrow-col">→</div>
+
+        <!-- RESULTS -->
+        <div class="col">
+            <div class="col-label green">Results</div>
+            <div class="card green" style="justify-content: flex-start; padding-top: 20px;">
+                <div class="result-item">
+                    <span class="result-label">Bacterial Spot</span>
+                    <span class="result-pct">97.3%</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">Healthy</span>
+                    <span class="result-pct">95.1%</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">Healthy</span>
+                    <span class="result-pct">95.1%</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">Healthy</span>
+                    <span class="result-pct">95.1%</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Dataset Banner -->
+    <div class="dataset-banner">
+        <span>Dataset</span> =
+        <span>26,000+ Images</span>, <span>13 Classes</span>
+    </div>
+
+</body>
+
+</html>
