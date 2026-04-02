@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bilingual Presentation Papers — Leaf Disease Detection</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Hind+Siliguri:wght@400;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+        }
+        .bn-text {
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-900 min-h-screen py-16 px-5 flex flex-col items-center">
+
+    <h1 class="text-center text-2xl md:text-4xl font-bold mb-16 leading-tight tracking-tight uppercase border-b-4 border-slate-800 pb-6 w-full max-w-[1200px]">
+        Project Diagram Presentation Papers<br>
+        <span class="text-lg md:text-xl font-semibold text-slate-500 tracking-widest mt-2 block bn-text tracking-normal">ডায়াগ্রাম প্রেজেন্টেশন পেপারস (দ্বিভাষিক সংস্করণ)</span>
+    </h1>
+
+    <div class="space-y-12 w-full max-w-[1200px]">
+        
+        <!-- Section 1: CNN Architecture -->
+        <div class="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden grid grid-cols-1 md:grid-cols-2">
+            <!-- English Column -->
+            <div class="p-8 md:p-10 border-b md:border-b-0 md:border-r border-slate-100 bg-blue-50/20">
+                <h2 class="text-xl font-bold text-blue-800 mb-6 uppercase tracking-wider">1. CNN Architecture (MobileNetV2 based)</h2>
+                <div class="space-y-4 text-sm leading-relaxed text-slate-700">
+                    <p><strong>Objective:</strong> To illustrate the deep learning pipeline responsible for processing leaf images and extracting disease characteristics for classification.</p>
+                    <p><strong>Key Components:</strong> Input Layer, Data Pipeline (resizing/normalization), Model Core (feature extraction), and Output Layer (Softmax probability).</p>
+                    <p class="italic text-slate-500"><strong>Presentation Note:</strong> This diagram visualizes the internal data flow by showing the transformation from raw pixels to clinical diagnosis.</p>
+                </div>
+            </div>
+            <!-- Bangla Column -->
+            <div class="p-8 md:p-10 bn-text">
+                <h2 class="text-xl font-bold text-blue-800 mb-6 uppercase tracking-wider">১. সিএনএন আর্কিটেকচার (MobileNetV2 ভিত্তি)</h2>
+                <div class="space-y-4 text-base leading-relaxed text-slate-700">
+                    <p><strong>উদ্দেশ্য:</strong> উদ্ভিদ পাতার রোগ শনাক্তকরণের জন্য ইমেজ প্রোসেসিং এবং বৈশিষ্ট্য সংগ্রহের জন্য ব্যবহৃত ডিপ লার্নিং পাইপলাইন চিত্রিত করা।</p>
+                    <p><strong>মূল উপাদানসমূহ:</strong> ইনপুট লেয়ার, ডাটা পাইপলাইন (রিসাইজ/নর্মালাইজেশন), মডেল কোর (বৈশিষ্ট্য সংগ্রহ), এবং আউটপুট লেয়ার।</p>
+                    <p class="italic text-slate-500"><strong>প্রেজেন্টেশন নোট:</strong> এই ডায়াগ্রামটি কাঁচা পিক্সেল থেকে ক্লিনিকাল ডিটেকশন পর্যন্ত ডাটার স্তরবিন্যাস পরিবর্তন দেখিয়ে সিস্টেমের অভ্যন্তরীণ প্রবাহকে চিত্রিত করে।</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: UML Class Diagram -->
+        <div class="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden grid grid-cols-1 md:grid-cols-2">
+            <!-- English Column -->
+            <div class="p-8 md:p-10 border-b md:border-b-0 md:border-r border-slate-100 bg-indigo-50/20">
+                <h2 class="text-xl font-bold text-indigo-800 mb-6 uppercase tracking-wider">2. UML Class Diagram</h2>
+                <div class="space-y-4 text-sm leading-relaxed text-slate-700">
+                    <p><strong>Objective:</strong> To describe the static structure of the application from an Object-Oriented Programming (OOP) perspective.</p>
+                    <p><strong>Key Components:</strong> LeafDetectorApp (Controller), CNNModel, PlantPreprocessor, and Data Entities (Treatment/KnowledgeBase).</p>
+                    <p class="italic text-slate-500"><strong>Presentation Note:</strong> Demonstrates the modularity and scalability of the software architecture, ensuring components have single responsibilities.</p>
+                </div>
+            </div>
+            <!-- Bangla Column -->
+            <div class="p-8 md:p-10 bn-text">
+                <h2 class="text-xl font-bold text-indigo-800 mb-6 uppercase tracking-wider">২. ইউএমএল ক্লাস ডায়াগ্রাম (UML Class Diagram)</h2>
+                <div class="space-y-4 text-base leading-relaxed text-slate-700">
+                    <p><strong>উদ্দেশ্য:</strong> একটি অবজেক্ট-ওরিয়েন্টেড প্রোগ্রামিং (OOP) দৃষ্টিকোণ থেকে অ্যাপ্লিকেশনের স্ট্যাটিক কাঠামো বর্ণনা করা।</p>
+                    <p><strong>মূল উপাদানসমূহ:</strong> LeafDetectorApp (কন্ট্রোলার), CNNModel, PlantPreprocessor এবং ডাটা এনটিটি (ট্রিটমেন্ট/নলেজ বেস)।</p>
+                    <p class="italic text-slate-500"><strong>প্রেজেন্টেশন নোট:</strong> এটি সফটওয়্যার আর্কিটেকচারের মডুলারিটি এবং স্কেলেবিলিটি প্রদর্শন করে, যা প্রতিটি ইউনিটের নির্দিষ্ট দায়িত্ব নিশ্চিত করে।</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: UML Use Case Diagram -->
+        <div class="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden grid grid-cols-1 md:grid-cols-2">
+            <!-- English Column -->
+            <div class="p-8 md:p-10 border-b md:border-b-0 md:border-r border-slate-100 bg-emerald-50/20">
+                <h2 class="text-xl font-bold text-emerald-800 mb-6 uppercase tracking-wider">3. UML Use Case Diagram</h2>
+                <div class="space-y-4 text-sm leading-relaxed text-slate-700">
+                    <p><strong>Objective:</strong> To map the functional requirements and determine how actors (users/admins) interact with the system.</p>
+                    <p><strong>Key Components:</strong> Primary Actor (Farmer), Secondary Actor (Model/Database), and Include/Extend relationships.</p>
+                    <p class="italic text-slate-500"><strong>Presentation Note:</strong> Provides a stakeholder-level view of the system, identifying operational scenarios and actor boundaries.</p>
+                </div>
+            </div>
+            <!-- Bangla Column -->
+            <div class="p-8 md:p-10 bn-text">
+                <h2 class="text-xl font-bold text-emerald-800 mb-6 uppercase tracking-wider">৩. ইউএমএল ইউজ কেস ডায়াগ্রাম</h2>
+                <div class="space-y-4 text-base leading-relaxed text-slate-700">
+                    <p><strong>উদ্দেশ্য:</strong> কার্যকারিতার প্রয়োজনীয়তা নির্ধারণ এবং বিভিন্ন অ্যাক্টর (ইউজার/অ্যাডমিন) কিভাবে সিস্টেমের সাথে যোগাযোগ করে তা ম্যাপ করা।</p>
+                    <p><strong>মূল উপাদানসমূহ:</strong> প্রাইমারি অ্যাক্টর (কৃষক/গবেষক), সেকেন্ডারি অ্যাক্টর (এমএল মডেল/ডাটাবেস) এবং ইনক্লুড/এক্সটেন্ড রিলেশন।</p>
+                    <p class="italic text-slate-500"><strong>প্রেজেন্টেশন নোট:</strong> এই ডায়াগ্রামটি স্টেকহোল্ডার-লেভেল ভিউ প্রদান করে এবং সব ধরণের কাজের দৃশ্যপট এবং গণ্ডি চিহ্নিত করে।</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: ERD (Entity Relationship) -->
+        <div class="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden grid grid-cols-1 md:grid-cols-2">
+            <!-- English Column -->
+            <div class="p-8 md:p-10 border-b md:border-b-0 md:border-r border-slate-100 bg-amber-50/20">
+                <h2 class="text-xl font-bold text-amber-800 mb-6 uppercase tracking-wider">4. Entity-Relationship Diagram (ERD)</h2>
+                <div class="space-y-4 text-sm leading-relaxed text-slate-700">
+                    <p><strong>Objective:</strong> To represent the relational database schema managing disease knowledge and treatment strategies.</p>
+                    <p><strong>Key Components:</strong> Treatments Table, KnowledgeBase Table, and attribute mappings (PK/Unique).</p>
+                    <p class="italic text-slate-500"><strong>Presentation Note:</strong> The ERD highlights the system's ability to store and retrieve cross-referenced botanical data reliably.</p>
+                </div>
+            </div>
+            <!-- Bangla Column -->
+            <div class="p-8 md:p-10 bn-text">
+                <h2 class="text-xl font-bold text-amber-800 mb-6 uppercase tracking-wider">৪. এনটিটি-রিলেশনশিপ ডায়াগ্রাম (ERD)</h2>
+                <div class="space-y-4 text-base leading-relaxed text-slate-700">
+                    <p><strong>উদ্দেশ্য:</strong> রোগ ও প্রতিকারের কৌশল ম্যানেজমেন্টের জন্য ব্যবহার করা রিলেশনাল ডাটাবেস স্কিমা উপস্থাপন করা।</p>
+                    <p><strong>মূল উপাদানসমূহ:</strong> Treatments টেবিল, KnowledgeBase টেবিল এবং অ্যাট্রিবিউট ম্যাপিং (PK/Unique)।</p>
+                    <p class="italic text-slate-500"><strong>প্রেজেন্টেশন নোট:</strong> এই ERD-টি ডাটবেসের বোটানিক্যাল ডাটা স্টোর এবং রিট্রিভ করার ক্ষমতা ফুটিয়ে তোলে, যা নির্ভুল ট্রিটমেন্ট নিশ্চিত করে।</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Final Note -->
+    <div class="mt-16 w-full max-w-[1200px] border-t-2 border-slate-200 pt-8 text-center text-slate-400 italic text-sm md:text-base bn-text">
+        * Note: These presentation summaries are designed to accompany the high-resolution diagrams in the project report. <br>
+        (এই সারসংক্ষেপগুলো প্রজেক্ট রিপোর্টের হাই-রেজোলিউশন ডায়াগ্রামগুলোর সাথে প্রদানের জন্য তৈরি করা হয়েছে।)
+    </div>
+
+</body>
+
+</html>

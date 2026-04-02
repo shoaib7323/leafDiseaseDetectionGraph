@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UML Class Diagram — Leaf Disease Detection</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-900 min-h-screen py-10 px-5 flex flex-col items-center">
+
+    <h1 class="text-center text-2xl md:text-3xl font-bold mb-16 leading-tight tracking-tight uppercase text-gray-800 border-b-2 border-gray-300 pb-4 w-full max-w-[1200px]">
+        UML Class Diagram: System Architecture<br>
+        <span class="text-sm md:text-base font-semibold text-gray-500 tracking-wider">Leaf Disease Detection & Treatment System</span>
+    </h1>
+
+    <div class="relative w-full max-w-[1200px]">
+        
+        <!-- Main Controller Instance -->
+        <div class="flex justify-center mb-16">
+            <div class="bg-white border-2 border-gray-800 rounded-lg w-72 shadow-none overflow-hidden">
+                <div class="bg-gray-800 text-white p-3 text-center font-bold uppercase tracking-widest text-sm">LeafDetectorApp</div>
+                <div class="p-3 text-xs space-y-1 font-semibold text-gray-700 border-b border-gray-200">
+                    <p>- Database db</p>
+                    <p>- CNNModel model</p>
+                    <p>- PlantPreprocessor preprocessor</p>
+                </div>
+                <div class="p-3 text-xs space-y-1 font-medium text-gray-600">
+                    <p>+ run_inference(image: Image) Result</p>
+                    <p>+ fetch_treatment(disease: str) Treatment</p>
+                    <p>+ get_knowledge_content() List</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Relationship Lines (Arrows to Sub-components) -->
+        <div class="hidden md:block absolute left-1/2 top-40 h-8 border-l-2 border-dashed border-gray-400 -translate-x-1/2"></div>
+        <div class="hidden md:block absolute left-[15%] top-48 w-70% border-t-2 border-dashed border-gray-400 mx-auto" style="width: 70%;"></div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            
+            <!-- Preprocessor Class -->
+            <div class="flex flex-col items-center">
+                <div class="md:h-8 border-l-2 border-dashed border-gray-400 hidden md:block mb-4"></div>
+                <div class="bg-white border-2 border-teal-700 rounded-lg w-full shadow-none overflow-hidden">
+                    <div class="bg-teal-700 text-white p-3 text-center font-bold uppercase tracking-widest text-xs">PlantPreprocessor</div>
+                    <div class="p-3 text-[0.65rem] space-y-1 font-semibold text-teal-900 border-b border-teal-100">
+                        <p>+ resize(image) Image</p>
+                        <p>+ normalize(image) Image</p>
+                        <p>+ augment(image) Image</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CNNModel Class -->
+            <div class="flex flex-col items-center">
+                <div class="md:h-8 border-l-2 border-dashed border-gray-400 hidden md:block mb-4"></div>
+                <div class="bg-white border-2 border-violet-700 rounded-lg w-full shadow-none overflow-hidden">
+                    <div class="bg-violet-700 text-white p-3 text-center font-bold uppercase tracking-widest text-xs">CNNModel</div>
+                    <div class="p-3 text-[0.65rem] space-y-1 font-semibold text-violet-900 border-b border-violet-100">
+                        <p>- String backbone</p>
+                        <p>- Weights weights</p>
+                    </div>
+                    <div class="p-3 text-[0.65rem] space-y-1 font-medium text-violet-800">
+                        <p>+ feature_extraction()</p>
+                        <p>+ global_avg_pooling()</p>
+                        <p>+ dense_layers()</p>
+                        <p>+ classify(image) Prediction</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Treatment Data Class -->
+            <div class="flex flex-col items-center">
+                <div class="md:h-8 border-l-2 border-dashed border-gray-400 hidden md:block mb-4"></div>
+                <div class="bg-white border-2 border-amber-700 rounded-lg w-full shadow-none overflow-hidden">
+                    <div class="bg-amber-700 text-white p-3 text-center font-bold uppercase tracking-widest text-xs">&laquo;Entity&raquo;<br>Treatment</div>
+                    <div class="p-3 text-[0.65rem] space-y-1 font-semibold text-amber-900 border-b border-amber-100">
+                        <p>+ int id</p>
+                        <p>+ String disease_key</p>
+                        <p>+ String desc_en/bn</p>
+                        <p>+ String chemicals_bn</p>
+                    </div>
+                    <div class="p-3 text-[0.65rem] space-y-1 font-medium text-amber-800">
+                        <p>+ to_json()</p>
+                        <p>+ get_summary()</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KnowledgeBase Data Class -->
+            <div class="flex flex-col items-center">
+                <div class="md:h-8 border-l-2 border-dashed border-gray-400 hidden md:block mb-4"></div>
+                <div class="bg-white border-2 border-emerald-700 rounded-lg w-full shadow-none overflow-hidden">
+                    <div class="bg-emerald-700 text-white p-3 text-center font-bold uppercase tracking-widest text-xs">&laquo;Entity&raquo;<br>KnowledgeBase</div>
+                    <div class="p-3 text-[0.65rem] space-y-1 font-semibold text-emerald-900 border-b border-emerald-100">
+                        <p>+ int id</p>
+                        <p>+ String category</p>
+                        <p>+ String title_bn</p>
+                        <p>+ String content_bn</p>
+                    </div>
+                    <div class="p-3 text-[0.65rem] space-y-1 font-medium text-emerald-800">
+                        <p>+ display_html()</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Relationship Legend (Book Footnote) -->
+        <div class="mt-20 w-full bg-gray-100 border border-gray-300 rounded p-4 text-[0.7rem] text-gray-500">
+            <p class="font-bold uppercase tracking-wider text-gray-700 mb-1">Architecture Legend:</p>
+            <p>1. <strong>LeafDetectorApp</strong> acts as the central controller orchestrating data flow between the UI and server.</p>
+            <p>2. Dashed lines represent <strong>dependency</strong> relationships between the main controller and sub-components.</p>
+            <p>3. <strong>Entities</strong> correspond to the physical database tables defined in the MySQL schema.</p>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
