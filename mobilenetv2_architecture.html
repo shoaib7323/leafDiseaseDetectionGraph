@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MobileNetV2 Architecture Diagram</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        
+        body { 
+            font-family: 'Inter', sans-serif; 
+        }
+        
+        .download-btn {
+            display: inline-flex; align-items: center; gap: 7px;
+            background: #1e293b; color: #fff; border: none; border-radius: 8px;
+            padding: 9px 20px; font-size: 0.82rem; font-weight: 600;
+            cursor: pointer; letter-spacing: 0.04em;
+            transition: background 0.18s, transform 0.12s, box-shadow 0.18s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.13); font-family: 'Inter', sans-serif;
+        }
+        
+        .download-btn:hover {
+            background: #0f172a; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); transform: translateY(-1px);
+        }
+        
+        .download-btn:active { 
+            transform: translateY(0px); 
+        }
+        
+        .layer-box {
+            border-radius: 8px; padding: 12px; text-align: center;
+            border: 2px solid; position: relative; font-weight: 600; font-size: 0.9rem;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            min-height: 60px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .arrow-down {
+            color: #94a3b8; font-size: 1.5rem; text-align: center; line-height: 1; padding: 4px 0;
+            font-weight: bold;
+        }
+        
+        .bg-teal-light { background-color: #f0fdfa; border-color: #14b8a6; color: #115e59; }
+        .bg-blue-light { background-color: #eff6ff; border-color: #3b82f6; color: #1e3a8a; }
+        .bg-purple-light { background-color: #faf5ff; border-color: #a855f7; color: #581c87; }
+        .bg-amber-light { background-color: #fffbeb; border-color: #f59e0b; color: #92400e; }
+        .bg-red-light { background-color: #fef2f2; border-color: #ef4444; color: #991b1b; }
+    </style>
+</head>
+
+<body class="bg-gray-100 flex flex-col items-center py-10 px-5">
+
+    <div id="diagram-capture" class="w-full max-w-[1000px] bg-white shadow-xl rounded-2xl pt-8 px-8 pb-8 border border-gray-200">
+        
+        <h1 class="text-center text-2xl md:text-3xl font-bold mb-8 uppercase tracking-widest text-slate-800 border-b-2 border-slate-200 pb-4">
+            MobileNetV2 Architecture<br>
+            <span class="text-sm md:text-base font-semibold text-slate-500 tracking-wider">Efficient Deep Learning for Leaf Disease Detection</span>
+        </h1>
+
+        <div class="flex flex-col md:flex-row gap-8 md:gap-16 mt-6 px-4">
+            
+            <!-- Left Side: Main Architecture Pipeline -->
+            <div class="flex-1 flex flex-col items-center">
+                <h3 class="text-base font-bold text-slate-600 mb-6 uppercase tracking-wider border-b-2 border-slate-300 pb-1">Overall Pipeline</h3>
+                
+                <div class="w-64 layer-box bg-teal-light">
+                    <span class="text-2xl mb-1">📷</span>
+                    <span>Input Image</span>
+                    <span class="text-xs font-normal mt-1 opacity-80">(128 × 128 × 3)</span>
+                </div>
+                <div class="arrow-down">↓</div>
+                
+                <div class="w-64 layer-box bg-blue-light">
+                    <span>Conv2D (3×3)</span>
+                    <span class="text-xs font-normal mt-1 opacity-80">Stride 2, 32 Filters</span>
+                </div>
+                <div class="arrow-down">↓</div>
+
+                <div class="w-64 layer-box bg-purple-light shadow-md border-dashed" style="border-width: 3px;">
+                    <span>Bottleneck Blocks</span>
+                    <span class="text-xs font-normal mt-1 opacity-80">(Inverted Residuals) × 17</span>
+                </div>
+                <div class="arrow-down">↓</div>
+
+                <div class="w-64 layer-box bg-blue-light">
+                    <span>Conv2D (1×1)</span>
+                    <span class="text-xs font-normal mt-1 opacity-80">1280 Filters</span>
+                </div>
+                <div class="arrow-down">↓</div>
+
+                <div class="w-64 layer-box bg-amber-light">
+                    <span>Global Average Pooling</span>
+                    <span class="text-xs font-normal mt-1 opacity-80">(1 × 1 × 1280)</span>
+                </div>
+                <div class="arrow-down">↓</div>
+
+                <div class="w-64 layer-box bg-red-light" style="border-width: 3px;">
+                    <span>Dense / Output Layer</span>
+                    <span class="text-xs font-normal mt-1 opacity-80">Softmax (13 Classes)</span>
+                </div>
+            </div>
+
+            <!-- Right Side: Inverted Residual Block Diagram -->
+            <div class="flex-1 flex flex-col items-center">
+                <h3 class="text-base font-bold text-slate-600 mb-6 uppercase tracking-wider border-b-2 border-slate-300 pb-1">Inside a Bottleneck Block</h3>
+                
+                <div class="relative flex flex-col items-center w-full max-w-[340px] bg-slate-50 p-6 rounded-xl border-2 border-slate-200 mt-2 shadow-sm">
+                    
+                    <!-- Residual connection line (SVG overlay for accuracy) -->
+                    <svg class="absolute inset-0 w-full h-full pointer-events-none" style="z-index: 0;">
+                        <path d="M 170 40 L 40 40 L 40 330 L 160 330" fill="none" stroke="#a855f7" stroke-width="3" stroke-dasharray="6,4" />
+                        <polygon points="160,325 170,330 160,335" fill="#a855f7" />
+                        
+                        <!-- Rotated Text Label -->
+                        <rect x="25" y="145" width="20" height="80" fill="#f8fafc" />
+                    </svg>
+
+                    <div class="absolute top-[185px] left-[-35px] transform -rotate-90 text-[0.65rem] font-bold text-purple-600 tracking-widest bg-slate-50 px-1 py-0.5 z-10 rounded">
+                        RESIDUAL ADD
+                    </div>
+
+                    <div class="text-xs font-bold text-slate-500 mb-5 px-3 py-1 bg-white border border-slate-300 rounded shadow-sm z-10 relative">Input Features</div>
+                    
+                    <!-- Expansion -->
+                    <div class="w-48 layer-box bg-white border-purple-300 text-purple-800 z-10 relative">
+                        <span class="text-sm">1×1 Conv2D</span>
+                        <span class="text-xs font-normal mt-0.5 opacity-80">Expansion Phase (ReLU6)</span>
+                    </div>
+                    <div class="arrow-down text-purple-300 z-10 relative">↓</div>
+
+                    <!-- Depthwise -->
+                    <div class="w-48 layer-box bg-white border-purple-500 text-purple-900 border-[3px] shadow-sm z-10 relative">
+                        <span class="text-sm">3×3 Depthwise Conv</span>
+                        <span class="text-xs font-normal mt-0.5 opacity-80">Spatial Filtering (ReLU6)</span>
+                    </div>
+                    <div class="arrow-down text-purple-300 z-10 relative">↓</div>
+
+                    <!-- Projection -->
+                    <div class="w-48 layer-box bg-white border-purple-300 text-purple-800 z-10 relative">
+                        <span class="text-sm">1×1 Conv2D</span>
+                        <span class="text-xs font-normal mt-0.5 opacity-80">Projection Phase (Linear)</span>
+                    </div>
+
+                    <div class="text-xs font-bold text-slate-500 mt-5 px-3 py-1 bg-white border border-slate-300 rounded shadow-sm z-10 relative">Output Features</div>
+                </div>
+
+                <div class="mt-10 bg-purple-50/80 p-5 rounded-lg border-2 border-purple-100 text-sm text-purple-900 w-full max-w-[340px] shadow-sm">
+                    <p class="font-bold mb-2 uppercase tracking-wide text-[0.75rem] border-b border-purple-200 pb-1">Key Advantages:</p>
+                    <ul class="list-disc pl-5 space-y-2 text-xs leading-relaxed">
+                        <li><strong>Depthwise Separable Convolutions:</strong> Drastically reduce parameters and computation.</li>
+                        <li><strong>Linear Bottlenecks:</strong> Prevent information loss in low-dimensional spaces.</li>
+                        <li><strong>Inverted Residuals:</strong> Shortcut connections between thin bottlenecks for better gradient flow.</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div> <!-- end #diagram-capture -->
+
+    <!-- Download Button (Outside the capture zone) -->
+    <div class="mt-8 flex justify-center">
+        <button class="download-btn" id="mobilenet-dl-btn" onclick="downloadDiagram()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            Download MobileNetV2 Diagram (PNG)
+        </button>
+    </div>
+
+    <script>
+        function downloadDiagram() {
+            const el = document.getElementById('diagram-capture');
+            const btn = document.getElementById('mobilenet-dl-btn');
+            btn.textContent = 'Generating…';
+            btn.disabled = true;
+
+            html2canvas(el, {
+                backgroundColor: '#ffffff',
+                scale: 2,
+                useCORS: true,
+                logging: false
+            }).then(canvas => {
+                const pad = 24;
+                const padded = document.createElement('canvas');
+                padded.width = canvas.width + pad * 2;
+                padded.height = canvas.height + pad * 2;
+                const pCtx = padded.getContext('2d');
+                pCtx.fillStyle = '#ffffff';
+                pCtx.fillRect(0, 0, padded.width, padded.height);
+                pCtx.drawImage(canvas, pad, pad);
+
+                const link = document.createElement('a');
+                link.download = 'MobileNetV2_Architecture.png';
+                link.href = padded.toDataURL('image/png');
+                link.click();
+
+                btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download MobileNetV2 Diagram (PNG)`;
+                btn.disabled = false;
+            });
+        }
+    </script>
+</body>
+</html>

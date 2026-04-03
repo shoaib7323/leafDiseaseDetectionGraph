@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preprocessing Pipeline Diagram</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        
+        body { 
+            font-family: 'Inter', sans-serif; 
+        }
+        
+        .download-btn {
+            display: inline-flex; align-items: center; gap: 7px;
+            background: #1e293b; color: #fff; border: none; border-radius: 8px;
+            padding: 9px 20px; font-size: 0.82rem; font-weight: 600;
+            cursor: pointer; letter-spacing: 0.04em;
+            transition: background 0.18s, transform 0.12s, box-shadow 0.18s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.13); font-family: 'Inter', sans-serif;
+        }
+        
+        .download-btn:hover {
+            background: #0f172a; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); transform: translateY(-1px);
+        }
+        
+        .download-btn:active { 
+            transform: translateY(0px); 
+        }
+        
+        .pipeline-box {
+            position: relative; border-radius: 12px; padding: 20px; text-align: center;
+            border: 2px solid; font-weight: 600; font-size: 0.95rem;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            min-width: 190px; min-height: 140px; box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+            background: white; z-index: 10;
+        }
+        
+        .arrow-right {
+            color: #94a3b8; font-size: 2.2rem; display: flex; align-items: center; justify-content: center;
+            font-weight: bold; padding: 0 5px; z-index: 5;
+        }
+        
+        .step-num {
+            position: absolute; top: -14px; left: -14px; width: 32px; height: 32px;
+            background: #1e293b; color: white; border-radius: 50%; font-size: 0.9rem;
+            display: flex; align-items: center; justify-content: center; font-weight: bold; border: 3px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 flex flex-col items-center py-10 px-5">
+
+    <div id="diagram-capture" class="w-full max-w-[1250px] bg-white shadow-xl rounded-2xl pt-10 px-8 pb-10 border border-gray-200">
+        
+        <h1 class="text-center text-2xl md:text-3xl font-bold mb-16 uppercase tracking-widest text-slate-800 border-b-2 border-slate-200 pb-4">
+            Image Preprocessing Pipeline<br>
+            <span class="text-sm md:text-base font-semibold text-slate-500 tracking-wider">Data Preparation for Deep Learning</span>
+        </h1>
+
+        <div class="flex flex-col md:flex-row items-center justify-center w-full relative mb-6">
+            
+            <!-- Connecting dashed line running behind items (desktop only) -->
+            <div class="hidden md:block absolute top-[70px] left-[8%] right-[8%] h-1 z-0 border-t-2 border-dashed border-slate-300"></div>
+
+            <!-- Step 1: Raw Image -->
+            <div class="pipeline-box border-slate-400">
+                <div class="step-num bg-slate-600">1</div>
+                <div class="text-3xl mb-2">📸</div>
+                <span class="text-slate-800">Raw Input Image</span>
+                <span class="text-[0.7rem] font-medium mt-2 text-slate-500">Unprocessed field image<br>Varied sizes & lighting</span>
+            </div>
+
+            <div class="arrow-right md:rotate-0 rotate-90 my-2 md:my-0">→</div>
+
+            <!-- Step 2: Background Removal -->
+            <div class="pipeline-box border-emerald-500">
+                <div class="step-num bg-emerald-600">2</div>
+                <div class="text-3xl mb-2">✂️</div>
+                <span class="text-emerald-800">Background Removal</span>
+                <span class="text-[0.7rem] font-medium mt-2 text-emerald-600">AI <em>rembg</em> extraction<br>Isolate leaf from soil/shadows</span>
+            </div>
+
+            <div class="arrow-right md:rotate-0 rotate-90 my-2 md:my-0">→</div>
+
+            <!-- Step 3: Resizing -->
+            <div class="pipeline-box border-blue-500">
+                <div class="step-num bg-blue-600">3</div>
+                <div class="text-3xl mb-2">📐</div>
+                <span class="text-blue-800">Image Resizing</span>
+                <span class="text-[0.7rem] font-medium mt-2 text-blue-600">Standardizing dimensions<br>Target: 128 × 128 px</span>
+            </div>
+
+            <div class="arrow-right md:rotate-0 rotate-90 my-2 md:my-0">→</div>
+
+            <!-- Step 4: Augmentation -->
+            <div class="pipeline-box border-purple-500">
+                <div class="step-num bg-purple-600">4</div>
+                <div class="text-3xl mb-2">🔄</div>
+                <span class="text-purple-800">Data Augmentation</span>
+                <span class="text-[0.7rem] font-medium mt-2 text-purple-600">Flip, Rotate, Zoom, Shift<br>Increases dataset variance</span>
+            </div>
+
+            <div class="arrow-right md:rotate-0 rotate-90 my-2 md:my-0">→</div>
+
+            <!-- Step 5: Normalization -->
+            <div class="pipeline-box border-amber-500">
+                <div class="step-num bg-amber-600">5</div>
+                <div class="text-3xl mb-2">🔢</div>
+                <span class="text-amber-800">Normalization</span>
+                <span class="text-[0.7rem] font-medium mt-2 text-amber-600">Scale pixel values<br>Range mapping [0, 1]</span>
+            </div>
+
+        </div>
+
+        <!-- Specifications Footer box -->
+        <div class="mt-14 bg-slate-50 border border-slate-200 p-6 rounded-xl w-full max-w-[1000px] mx-auto text-sm shadow-inner">
+            <p class="font-bold uppercase tracking-wider text-slate-700 border-b border-slate-300 pb-2 mb-4">Pipeline Specifications & Methodologies</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pl-2">
+                <div>
+                    <p class="mb-2 text-slate-700"><span class="font-bold text-slate-800">Background Extraction:</span> AI-based subject matting (<code class="bg-slate-200 px-1 rounded text-xs">rembg</code>) is utilized to ensure precise isolation of the leaf disease features, mitigating background noise completely.</p>
+                    <p class="mb-1 text-slate-700"><span class="font-bold text-slate-800">Normalization Formula:</span> P<sub>norm</sub> = P<sub>orig</sub> / 255.0 (Rescaling RGB arrays)</p>
+                </div>
+                <div>
+                    <p class="mb-1 text-slate-700"><span class="font-bold text-slate-800">Data Augmentation Parameters (Keras ImageDataGenerator):</span></p>
+                    <ul class="list-disc ml-5 text-slate-600 text-[0.8rem] space-y-0.5 mt-1">
+                        <li><strong>Rotation Range:</strong> ±20 degrees</li>
+                        <li><strong>Flipping:</strong> Horizontal &amp; Vertical Enabled</li>
+                        <li><strong>Shear &amp; Zoom Range:</strong> 0.15 / 15%</li>
+                        <li><strong>Fill Mode:</strong> nearest (resolves boundary artifacts)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div> <!-- end #diagram-capture -->
+
+    <!-- Download Button (outside capture zone) -->
+    <div class="mt-8 flex justify-center">
+        <button class="download-btn" id="preproc-dl-btn" onclick="downloadDiagram()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            Download Preprocessing Pipeline Diagram (PNG)
+        </button>
+    </div>
+
+    <script>
+        function downloadDiagram() {
+            const el = document.getElementById('diagram-capture');
+            const btn = document.getElementById('preproc-dl-btn');
+            btn.textContent = 'Generating…';
+            btn.disabled = true;
+
+            html2canvas(el, {
+                backgroundColor: '#ffffff',
+                scale: 2,
+                useCORS: true,
+                logging: false
+            }).then(canvas => {
+                const pad = 24;
+                const padded = document.createElement('canvas');
+                padded.width = canvas.width + pad * 2;
+                padded.height = canvas.height + pad * 2;
+                const pCtx = padded.getContext('2d');
+                pCtx.fillStyle = '#ffffff';
+                pCtx.fillRect(0, 0, padded.width, padded.height);
+                pCtx.drawImage(canvas, pad, pad);
+
+                const link = document.createElement('a');
+                link.download = 'Preprocessing_Pipeline.png';
+                link.href = padded.toDataURL('image/png');
+                link.click();
+
+                btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download Preprocessing Pipeline Diagram (PNG)`;
+                btn.disabled = false;
+            });
+        }
+    </script>
+</body>
+</html>

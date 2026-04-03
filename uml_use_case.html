@@ -6,57 +6,122 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>UML Use Case Diagram (Scalable Vector Graphics)</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
         body {
             font-family: 'Inter', sans-serif;
         }
+
         svg {
             display: block;
             margin: auto;
             max-width: 100%;
             height: auto;
         }
+
         text {
             user-select: none;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: #1e293b;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 9px 20px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            letter-spacing: 0.04em;
+            transition: background 0.18s, transform 0.12s, box-shadow 0.18s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.13);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .download-btn:hover {
+            background: #0f172a;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .download-btn:active {
+            transform: translateY(0px);
         }
     </style>
 </head>
 
 <body class="bg-gray-100 flex flex-col items-center py-10 px-5">
 
-    <div class="w-full max-w-[1200px] bg-white shadow-xl rounded-2xl p-8 border border-gray-200">
-        
-        <h1 class="text-center text-2xl font-bold mb-8 uppercase tracking-widest text-slate-700">
+    <div id="diagram-capture"
+        class="w-full max-w-[1200px] bg-white shadow-xl rounded-2xl pt-8 px-8 pb-2 border border-gray-200">
+
+        <h1 class="text-center text-2xl font-bold mb-8 uppercase tracking-widest text-slate-700 hidden">
             Professional UML Use Case Diagram<br>
-            <span class="text-sm font-semibold text-slate-400">Plant Disease Detection & Management System</span>
+            <span class="text-sm font-semibold text-slate-400">Plant Disease Detection &amp; Management System</span>
         </h1>
 
         <!-- ALL-IN-ONE SVG DIAGRAM -->
-        <svg viewBox="0 0 1100 850" xmlns="http://www.w3.org/2000/svg">
-            
+        <svg id="diagram-use-case" viewBox="0 0 1100 648" xmlns="http://www.w3.org/2000/svg">
+
             <!-- DEFS for Markers and Styles -->
             <defs>
                 <marker id="arrow" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
                     <polygon points="0 0, 10 3.5, 0 7" fill="#475569" />
                 </marker>
                 <style>
-                    .use-case { fill: #f8fafc; stroke: #475569; stroke-width: 2; }
-                    .actor-text { font-size: 14px; font-weight: bold; fill: #1e293b; text-transform: uppercase; }
-                    .case-text { font-size: 13px; font-weight: 600; fill: #334155; }
-                    .relation-line { stroke: #475569; stroke-width: 1.5; }
-                    .dashed-line { stroke: #64748b; stroke-width: 1.5; stroke-dasharray: 5,5; }
-                    .label-text { font-size: 10px; font-style: italic; font-weight: bold; fill: #64748b; }
+                    .use-case {
+                        fill: #f8fafc;
+                        stroke: #475569;
+                        stroke-width: 2;
+                    }
+
+                    .actor-text {
+                        font-size: 14px;
+                        font-weight: bold;
+                        fill: #1e293b;
+                        text-transform: uppercase;
+                    }
+
+                    .case-text {
+                        font-size: 13px;
+                        font-weight: 600;
+                        fill: #334155;
+                    }
+
+                    .relation-line {
+                        stroke: #475569;
+                        stroke-width: 1.5;
+                    }
+
+                    .dashed-line {
+                        stroke: #64748b;
+                        stroke-width: 1.5;
+                        stroke-dasharray: 5, 5;
+                    }
+
+                    .label-text {
+                        font-size: 10px;
+                        font-style: italic;
+                        font-weight: bold;
+                        fill: #64748b;
+                    }
                 </style>
             </defs>
 
             <!-- SYSTEM BOUNDARY -->
-            <rect x="220" y="50" width="650" height="750" rx="15" fill="#f1f5f9" fill-opacity="0.5" stroke="#94a3b8" stroke-width="2" stroke-dasharray="8,8" />
-            <text x="545" y="80" text-anchor="middle" class="label-text" style="font-size: 14px; letter-spacing: 0.2em;">Plant Disease Detection System</text>
+            <rect x="220" y="30" width="650" height="600" rx="15" fill="#f1f5f9" fill-opacity="0.5" stroke="#94a3b8"
+                stroke-width="2" stroke-dasharray="8,8" />
+            <text x="545" y="58" text-anchor="middle" class="label-text"
+                style="font-size: 13px; letter-spacing: 0.15em;">Plant Disease Detection System</text>
 
             <!-- ACTORS (SVG DRAWN) -->
-            <!-- USER ACTOR -->
-            <g id="actor-user" transform="translate(80, 250)">
+            <!-- USER ACTOR (centred around uc1-uc3 range: 120-320) -->
+            <g id="actor-user" transform="translate(80, 170)">
                 <circle cx="20" cy="20" r="15" stroke="#2563eb" stroke-width="2.5" fill="none" />
                 <line x1="20" y1="35" x2="20" y2="75" stroke="#2563eb" stroke-width="2.5" />
                 <line x1="20" y1="45" x2="0" y2="60" stroke="#2563eb" stroke-width="2.5" />
@@ -66,8 +131,8 @@
                 <text x="20" y="125" text-anchor="middle" class="actor-text" style="fill: #2563eb;">User</text>
             </g>
 
-            <!-- ADMIN ACTOR -->
-            <g id="actor-admin" transform="translate(80, 580)">
+            <!-- ADMIN ACTOR (centred around uc8-uc9 range: 450-540) -->
+            <g id="actor-admin" transform="translate(80, 430)">
                 <circle cx="20" cy="20" r="15" stroke="#ef4444" stroke-width="2.5" fill="none" />
                 <line x1="20" y1="35" x2="20" y2="75" stroke="#ef4444" stroke-width="2.5" />
                 <line x1="20" y1="45" x2="0" y2="60" stroke="#ef4444" stroke-width="2.5" />
@@ -77,8 +142,8 @@
                 <text x="20" y="125" text-anchor="middle" class="actor-text" style="fill: #ef4444;">Admin</text>
             </g>
 
-            <!-- ML MODEL ACTOR (Right) -->
-            <g id="actor-ml" transform="translate(970, 320)">
+            <!-- ML MODEL ACTOR (Right, centred around uc6-uc7: 240-360) -->
+            <g id="actor-ml" transform="translate(970, 250)">
                 <circle cx="20" cy="25" r="20" stroke="#10b981" stroke-width="2.5" fill="none" />
                 <line x1="20" y1="45" x2="20" y2="85" stroke="#10b981" stroke-width="2.5" />
                 <line x1="20" y1="55" x2="0" y2="70" stroke="#10b981" stroke-width="2.5" />
@@ -88,90 +153,145 @@
                 <text x="20" y="140" text-anchor="middle" class="actor-text" style="fill: #10b981;">ML Model</text>
             </g>
 
-            <!-- USE CASE OVALS -->
+            <!-- USE CASE OVALS — compacted vertical spacing (~90px gaps) -->
             <!-- Group 1: User Interactions -->
-            <ellipse id="uc1" cx="380" cy="150" rx="100" ry="30" class="use-case" style="stroke: #3b82f6; fill: #eff6ff;" />
-            <text x="380" y="155" text-anchor="middle" class="case-text">Upload Leaf Image</text>
+            <ellipse id="uc1" cx="380" cy="120" rx="100" ry="28" class="use-case"
+                style="stroke: #3b82f6; fill: #eff6ff;" />
+            <text x="380" y="125" text-anchor="middle" class="case-text">Upload Leaf Image</text>
 
-            <ellipse id="uc2" cx="380" cy="280" rx="100" ry="30" class="use-case" style="stroke: #10b981; fill: #ecfdf5;" />
-            <text x="380" y="285" text-anchor="middle" class="case-text">View Analysis Results</text>
+            <ellipse id="uc2" cx="380" cy="215" rx="100" ry="28" class="use-case"
+                style="stroke: #10b981; fill: #ecfdf5;" />
+            <text x="380" y="220" text-anchor="middle" class="case-text">View Analysis Results</text>
 
-            <ellipse id="uc3" cx="380" cy="410" rx="110" ry="35" class="use-case" style="stroke: #f59e0b; fill: #fffbeb;" />
-            <text x="380" y="415" text-anchor="middle" class="case-text">Get Treatment Guide</text>
+            <ellipse id="uc3" cx="380" cy="310" rx="105" ry="28" class="use-case"
+                style="stroke: #f59e0b; fill: #fffbeb;" />
+            <text x="380" y="315" text-anchor="middle" class="case-text">Get Treatment Guide</text>
 
             <!-- Group 2: System Internal Work -->
-            <ellipse id="uc4" cx="545" cy="210" rx="90" ry="28" class="use-case" style="stroke: #a855f7; fill: #faf5ff;" />
-            <text x="545" y="215" text-anchor="middle" class="case-text" style="font-size: 11px;">Validate Image Quality</text>
+            <ellipse id="uc4" cx="545" cy="168" rx="88" ry="26" class="use-case"
+                style="stroke: #a855f7; fill: #faf5ff;" />
+            <text x="545" y="173" text-anchor="middle" class="case-text" style="font-size: 11px;">Validate Image
+                Quality</text>
 
-            <ellipse id="uc5" cx="710" cy="150" rx="100" ry="30" class="use-case" style="stroke: #6366f1; fill: #eef2ff;" />
-            <text x="710" y="155" text-anchor="middle" class="case-text">Process & Preprocess</text>
+            <ellipse id="uc5" cx="710" cy="120" rx="100" ry="28" class="use-case"
+                style="stroke: #6366f1; fill: #eef2ff;" />
+            <text x="710" y="125" text-anchor="middle" class="case-text">Process &amp; Preprocess</text>
 
-            <ellipse id="uc6" cx="710" cy="300" rx="100" ry="30" class="use-case" style="stroke: #ec4899; fill: #fdf2f8;" />
-            <text x="710" y="305" text-anchor="middle" class="case-text">Detect Plant Disease</text>
+            <ellipse id="uc6" cx="710" cy="240" rx="100" ry="28" class="use-case"
+                style="stroke: #ec4899; fill: #fdf2f8;" />
+            <text x="710" y="245" text-anchor="middle" class="case-text">Detect Plant Disease</text>
 
-            <ellipse id="uc7" cx="710" cy="450" rx="100" ry="30" class="use-case" style="stroke: #8b5cf6; fill: #f5f3ff;" />
-            <text x="710" y="455" text-anchor="middle" class="case-text">Generate Prediction</text>
+            <ellipse id="uc7" cx="710" cy="360" rx="100" ry="28" class="use-case"
+                style="stroke: #8b5cf6; fill: #f5f3ff;" />
+            <text x="710" y="365" text-anchor="middle" class="case-text">Generate Prediction</text>
 
             <!-- Group 3: Admin Work -->
-            <ellipse id="uc8" cx="380" cy="620" rx="100" ry="30" class="use-case" style="stroke: #ef4444; fill: #fef2f2;" />
-            <text x="380" y="625" text-anchor="middle" class="case-text">Manage Database</text>
+            <ellipse id="uc8" cx="380" cy="460" rx="100" ry="28" class="use-case"
+                style="stroke: #ef4444; fill: #fef2f2;" />
+            <text x="380" y="465" text-anchor="middle" class="case-text">Manage Database</text>
 
-            <ellipse id="uc9" cx="380" cy="730" rx="100" ry="30" class="use-case" style="stroke: #8b5cf6; fill: #f5f3ff;" />
-            <text x="380" y="735" text-anchor="middle" class="case-text">Update ML Model</text>
+            <ellipse id="uc9" cx="380" cy="555" rx="100" ry="28" class="use-case"
+                style="stroke: #8b5cf6; fill: #f5f3ff;" />
+            <text x="380" y="560" text-anchor="middle" class="case-text">Update ML Model</text>
 
             <!-- RELATIONSHIP LINES -->
-            <!-- User to UCs -->
-            <line x1="120" y1="300" x2="280" y2="150" class="relation-line" />
-            <line x1="120" y1="300" x2="280" y2="280" class="relation-line" />
-            <line x1="120" y1="300" x2="270" y2="410" class="relation-line" />
+            <!-- User to UCs (actor at translate(80,170) → head at 100,190) -->
+            <line x1="120" y1="220" x2="280" y2="120" class="relation-line" />
+            <line x1="120" y1="220" x2="280" y2="215" class="relation-line" />
+            <line x1="120" y1="220" x2="275" y2="310" class="relation-line" />
 
-            <!-- Admin to UCs -->
-            <line x1="120" y1="630" x2="280" y2="620" class="relation-line" />
-            <line x1="120" y1="630" x2="280" y2="730" class="relation-line" />
+            <!-- Admin to UCs (actor at translate(80,430) → head at 100,450) -->
+            <line x1="120" y1="480" x2="280" y2="460" class="relation-line" />
+            <line x1="120" y1="480" x2="280" y2="555" class="relation-line" />
 
             <!-- Include/Extend Lines (Dashed) -->
             <!-- uc1 -> uc4 (Include) -->
-            <path d="M430 175 Q470 210 470 210" class="dashed-line" />
-            <text x="440" y="200" class="label-text" filter="url(#bg)">&lt;&lt;include&gt;&gt;</text>
+            <path d="M430 140 Q465 168 465 168" class="dashed-line" />
+            <text x="435" y="158" class="label-text">&lt;&lt;include&gt;&gt;</text>
 
             <!-- uc4 -> uc5 (Include) -->
-            <path d="M620 190 Q650 170 650 170" class="dashed-line" />
-            <text x="610" y="170" class="label-text">&lt;&lt;include&gt;&gt;</text>
+            <path d="M618 152 Q648 128 648 128" class="dashed-line" />
+            <text x="610" y="135" class="label-text">&lt;&lt;include&gt;&gt;</text>
 
             <!-- uc5 -> uc6 (Extend) -->
-            <path d="M710 180 L710 270" class="dashed-line" />
-            <text x="715" y="230" class="label-text">&lt;&lt;extend&gt;&gt;</text>
+            <path d="M710 148 L710 212" class="dashed-line" />
+            <text x="715" y="184" class="label-text">&lt;&lt;extend&gt;&gt;</text>
 
             <!-- uc6 -> uc7 (Include) -->
-            <path d="M710 330 L710 420" class="dashed-line" />
-            <text x="715" y="380" class="label-text">&lt;&lt;include&gt;&gt;</text>
+            <path d="M710 268 L710 332" class="dashed-line" />
+            <text x="715" y="305" class="label-text">&lt;&lt;include&gt;&gt;</text>
 
-            <!-- ML Model to Cases -->
-            <line x1="970" y1="380" x2="810" y2="310" class="relation-line" />
-            <line x1="970" y1="380" x2="810" y2="445" class="relation-line" />
+            <!-- ML Model to Cases (actor at translate(970,250) → head at 990,295) -->
+            <line x1="970" y1="300" x2="810" y2="248" class="relation-line" />
+            <line x1="970" y1="300" x2="810" y2="358" class="relation-line" />
 
             <!-- LEGEND BOX (Bottom Left) -->
-            <g id="legend" transform="translate(40, 700)">
-                <rect x="0" y="0" width="180" height="110" fill="white" stroke="#94a3b8" stroke-width="1" rx="5" />
-                <text x="90" y="25" text-anchor="middle" style="font-size: 11px; font-weight: bold; fill: #64748b; letter-spacing: 0.1em; text-transform: uppercase;">Legend</text>
-                
-                <line x1="15" y1="45" x2="55" y2="45" class="relation-line" />
-                <text x="65" y="50" style="font-size: 10px; fill: #475569;">= Association</text>
+            <g id="legend" transform="translate(40, 545)">
+                <rect x="0" y="0" width="180" height="100" fill="white" stroke="#94a3b8" stroke-width="1" rx="5" />
+                <text x="90" y="22" text-anchor="middle"
+                    style="font-size: 11px; font-weight: bold; fill: #64748b; letter-spacing: 0.1em; text-transform: uppercase;">Legend</text>
 
-                <line x1="15" y1="70" x2="55" y2="70" class="dashed-line" />
-                <text x="65" y="75" style="font-size: 10px; fill: #475569;">= Include / Extend</text>
+                <line x1="15" y1="40" x2="55" y2="40" class="relation-line" />
+                <text x="65" y="45" style="font-size: 10px; fill: #475569;">= Association</text>
 
-                <ellipse cx="35" cy="95" rx="20" ry="8" class="use-case" />
-                <text x="65" y="100" style="font-size: 10px; fill: #475569;">= Use Case</text>
+                <line x1="15" y1="62" x2="55" y2="62" class="dashed-line" />
+                <text x="65" y="67" style="font-size: 10px; fill: #475569;">= Include / Extend</text>
+
+                <ellipse cx="35" cy="85" rx="20" ry="8" class="use-case" />
+                <text x="65" y="90" style="font-size: 10px; fill: #475569;">= Use Case</text>
             </g>
 
         </svg>
 
-        <div class="mt-8 text-center text-xs text-gray-400 italic">
-            * Note: All text in the diagram is easily editable within the &lt;text&gt; tags of the SVG code.
-        </div>
+    </div><!-- end #diagram-capture -->
 
+    <!-- Download Button (outside capture zone — won't appear in PNG) -->
+    <div class="mt-8 flex justify-center">
+        <button class="download-btn" id="use-case-dl-btn" onclick="downloadDiagram()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            Download Use Case Diagram (PNG)
+        </button>
     </div>
+
+    <script>
+        function downloadDiagram() {
+            const el = document.getElementById('diagram-capture');
+            const btn = document.getElementById('use-case-dl-btn');
+            btn.textContent = 'Generating…';
+            btn.disabled = true;
+
+            html2canvas(el, {
+                backgroundColor: '#ffffff',
+                scale: 2,
+                useCORS: true,
+                logging: false
+            }).then(canvas => {
+                // No tight-crop needed — we're already capturing exactly the card content
+                // Just add a small uniform padding
+                const pad = 24;
+                const padded = document.createElement('canvas');
+                padded.width = canvas.width + pad * 2;
+                padded.height = canvas.height + pad * 2;
+                const pCtx = padded.getContext('2d');
+                pCtx.fillStyle = '#ffffff';
+                pCtx.fillRect(0, 0, padded.width, padded.height);
+                pCtx.drawImage(canvas, pad, pad);
+
+                const link = document.createElement('a');
+                link.download = 'UML_Use_Case_Diagram.png';
+                link.href = padded.toDataURL('image/png');
+                link.click();
+
+                btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download Use Case Diagram (PNG)`;
+                btn.disabled = false;
+            });
+        }
+    </script>
 
 </body>
 
